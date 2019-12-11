@@ -22,6 +22,7 @@ body {
 p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
+  color: grey;
 }
 
 .botones {
@@ -36,14 +37,14 @@ p {
 }
 
 button {
-  border: 1px solid red;
+  border: 1px solid blue;
   width: 100px;
   height: 30px;
   margin: 15px;
 }
 
 canvas {
-  border: 1px solid red;
+  border: 1px solid blue;
   margin-left: auto;
   margin-right: auto;
   display: block;
