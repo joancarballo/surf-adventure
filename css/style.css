@@ -1,0 +1,11 @@
+body {
+  background-color: aqua;
+}
+
+.logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 170px;
+  display: block;
+}
