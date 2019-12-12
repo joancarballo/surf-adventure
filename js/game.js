@@ -58,7 +58,7 @@ const Game = {
     console.log("Reset llamado")
     this.background = new Background(this.ctx, this.width, this.height);
     console.log("Background Reseteado")
-    this.player = new Player(this.ctx, 50, 50, this.width, this.height,);
+    this.player = new Player(this.ctx, 150, 150, this.width, this.height,);
     console.log("Llama a Player desde Reset")
     //this.obstacles = [];
     //ScoreBoard.init(this.ctx, this.score)
