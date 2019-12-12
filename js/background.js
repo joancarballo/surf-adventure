@@ -9,10 +9,13 @@ class Background {
 
     this.posX = 0;
     this.posY = 0;
+
+    // this.vx = 8;
   }
 
   draw() {
+    console.log("Pinta el Fondo");
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
-    /* this.ctx.drawImage(this.image, this.posX + this.width, this.posY, this.width, this.height) */
+    // this.ctx.drawImage(this.image, this.posX + this.width, this.posY, this.width, this.height) */
   }
 }

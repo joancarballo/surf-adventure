@@ -23,12 +23,12 @@ const Game = {
   },
 
   start: function() {
-    this.reset()
     console.log("Start Llamada")
+    this.reset()
     this.interval = setInterval(() => {
       this.framesCounter++;
 
-      // this.clear();
+      this.clear();
       this.drawAll();
       // this.moveAll();
 
@@ -40,7 +40,7 @@ const Game = {
     }, 1000/this.fps)
     // if (this.playing = 1){
     //   document.getElementById('start-button').onclick = function() {
-    //     Game.reset()
+         Game.reset()
     //     Game.clear()
     //     Game.start()
     //     this.playing = 0;
@@ -50,13 +50,22 @@ const Game = {
 
   drawAll: function() {
     this.background.draw();
+    this.player.draw();
+    console.log("DrawAll llama al Player")
   },
 
   reset: function() {
+    console.log("Reset llamado")
     this.background = new Background(this.ctx, this.width, this.height);
-    //this.player = new Player(this.ctx, 50, 150, 'img/player.png', this.width,this.height, this.playerKeys);
+    console.log("Background Reseteado")
+    this.player = new Player(this.ctx, 50, 50, this.width, this.height,);
+    console.log("Llama a Player desde Reset")
     //this.obstacles = [];
     //ScoreBoard.init(this.ctx, this.score)
   },
+
+  clear: function() {
+    this.ctx.clearRect(0, 0, this.width, this.height)
+  }
 
 }
