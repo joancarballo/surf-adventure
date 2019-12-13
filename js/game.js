@@ -50,6 +50,8 @@ const Game = {
 
   drawAll: function() {
     this.background.draw();
+    this.ola.draw();
+    console.log("DrawAll llama a Ola")
     this.player.draw();
     console.log("DrawAll llama al Player")
   },
@@ -59,7 +61,9 @@ const Game = {
     this.background = new Background(this.ctx, this.width, this.height);
     console.log("Background Reseteado")
     this.player = new Player(this.ctx, 150, 150, this.width, this.height,);
-    console.log("Llama a Player desde Reset")
+    console.log("Player Reseteado")
+    this.ola = new Ola(this.ctx, 800, 150, this.width, this.height,);
+    console.log("Ola Reseteada")
     //this.obstacles = [];
     //ScoreBoard.init(this.ctx, this.score)
   },
