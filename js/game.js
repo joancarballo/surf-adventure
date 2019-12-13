@@ -4,7 +4,7 @@ const Game = {
   width: undefined,
   height: undefined,
   fps: 60,
-  framesCounter: 0,
+  //framesCounter: 0,
   playerKeys: {
     SPACE: 32,
   },
@@ -51,6 +51,7 @@ const Game = {
     this.background.draw();
     this.ola.draw();
     this.player.draw();
+   // this.player.animate();
   },
 
   moveAll: function() {
@@ -76,11 +77,11 @@ const Game = {
 
 function movimiento(){
   this.interval = setInterval(() => {
-    Game.framesCounter++;
+    //Game.framesCounter++;
 
     Game.clear();
-    Game.moveAll();
     Game.drawAll();
+    Game.moveAll();
 
     // this.clearObstacles()
     // if(this.framesCounter % 70 === 0) this.generateObstacles()
