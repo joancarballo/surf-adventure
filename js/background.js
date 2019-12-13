@@ -14,7 +14,6 @@ class Background {
   }
 
   draw() {
-    console.log("Pinta el Fondo");
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
     // this.ctx.drawImage(this.image, this.posX + this.width, this.posY, this.width, this.height) */
   }
