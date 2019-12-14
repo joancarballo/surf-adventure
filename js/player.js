@@ -32,12 +32,8 @@ class Player {
   }
 
   salta() {
-    if (this.posY != this.posYmax) {
+    if (this.posY >= this.posY0) {
       this.posY -= (this.gravity * this.posYmax);
-      // for (let i= 0; i < this.posYmax; i++) {
-      //   this.posY -= (this.gravity * 5);
-      //   console.log("Salto" + i)
-      // }
     } 
   }
 
