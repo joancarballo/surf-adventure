@@ -9,9 +9,9 @@ class Player {
     this.posY = gameHeight * 0.8 - this.height ;
     this.posY0 = gameHeight * 0.8 - this.height ;
     this.posYmax = 50;
-    this.gravity = 0.4;
+    this.gravity = 0.3;
     this.gameWidth = gameWidth;
-    this.vy = 1;
+    this.vy = 2;
     // this.frames = 3;
     // this.framesIndex = 0;
 
@@ -38,8 +38,6 @@ class Player {
   salta() {
       this.posY -= this.vy;
       this.vy -= 10;
-      console.log("Salta surfero!")
-
   }
 
   setListeners() {

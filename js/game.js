@@ -11,6 +11,8 @@ const Game = {
   score: 0,
   requestId: undefined,
   stop: false,
+  sharkJumped: 0,
+  obstaculoSiguienteAleatorio: 60,
 
   init: function() {
     this.canvas = document.getElementById('game-surf');
@@ -48,6 +50,8 @@ const Game = {
 
   generateObstacles: function() {
     this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height))
+    this.obstaculoSiguienteAleatorio = 200 + (Math.floor(Math.random()*150))
+    console.log("Siguiente obstáculo en..." + this.obstaculoSiguienteAleatorio)
   },
 
   reset: function() {
@@ -63,7 +67,7 @@ const Game = {
   },
 
   clearObstacles: function() {
-    this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= -200))
+    this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= -60))
   },
 
   isCollision: function() {
@@ -79,8 +83,6 @@ const Game = {
       while(id--){
         window.cancelAnimationFrame(id);
       }
-   
-    console.log(this.requestId)
     console.log("GAME MOTHERFUCKING OVER")
   }
 
@@ -97,8 +99,7 @@ function movimiento(){
     this.moveAll();
 
     // this.clearObstacles()
-     if(this.framesCounter % 70 === 0) this.generateObstacles()
-    // if(this.framesCounter % 100 === 0) this.score++;
+     if(this.framesCounter % this.obstaculoSiguienteAleatorio === 0) this.generateObstacles();
      if(this.isCollision()) this.gameOver();
     // if(this.framesCounter > 1000) this.framesCounter = 0;
     //window.requestAnimationFrame(movimiento.bind(this))
