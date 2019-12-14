@@ -50,7 +50,7 @@ const Game = {
 
   generateObstacles: function() {
     this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height))
-    this.obstaculoSiguienteAleatorio = 200 + (Math.floor(Math.random()*150))
+    this.obstaculoSiguienteAleatorio = Math.floor(Math.random()*394)+79
     console.log("Siguiente obstáculo en..." + this.obstaculoSiguienteAleatorio)
   },
 
