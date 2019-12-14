@@ -8,7 +8,7 @@ class Player {
     this.posX = 100;
     this.posY = gameHeight * 0.8 - this.height ;
     this.posY0 = gameHeight * 0.8 - this.height ;
-    this.posYmax = 100;
+    this.posYmax = 200;
     this.gravity = 1;
     this.gameWidth = gameWidth;
 
