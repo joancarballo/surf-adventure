@@ -8,10 +8,10 @@ class Player {
     this.posX = 100;
     this.posY = gameHeight * 0.8 - this.height ;
     this.posY0 = gameHeight * 0.8 - this.height ;
-    this.posYmax = 200;
-    this.gravity = 1;
+    this.posYmax = 50;
+    this.gravity = 0.4;
     this.gameWidth = gameWidth;
-
+    this.vy = 1;
     // this.frames = 3;
     // this.framesIndex = 0;
 
@@ -25,23 +25,30 @@ class Player {
   }
 
   move() {
-    if (this.posY != this.posY0){  // Esto limita que el surfero caiga hasta el infinito
-      this.posY += (this.gravity * 5);
+    if(this.posY <= this.posY0) {
+      this.posY += this.vy;
+      this.vy += this.gravity;
+    } else {
+      this.vy = 1;
+      this.posY = this.posY0;
     }
 
   }
 
   salta() {
-    if (this.posY >= this.posY0) {
-      this.posY -= (this.gravity * this.posYmax);
-    } 
+      this.posY -= this.vy;
+      this.vy -= 10;
+      console.log("Salta surfero!")
+
   }
 
   setListeners() {
     document.addEventListener('keydown', (e) => {
       switch(e.keyCode) {
         case 32:
-            this.salta();
+            if (this.posY >= this.posY0) {
+              this.salta();
+            }
             break;
       }
     })
