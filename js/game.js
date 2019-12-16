@@ -13,6 +13,8 @@ const Game = {
   stop: false,
   sharkJumped: 0,
   obstaculoSiguienteAleatorio: 60,
+  sharksJumped: 0,
+  sharksCount: 0,
 
   init: function() {
     this.canvas = document.getElementById('game-surf');
@@ -49,9 +51,11 @@ const Game = {
   },
 
   generateObstacles: function() {
+    this.sharksCount++
     this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height))
-    this.obstaculoSiguienteAleatorio = Math.floor(Math.random()*394)+79
+    this.obstaculoSiguienteAleatorio = 200 + (Math.floor(Math.random()*150))
     console.log("Siguiente obstáculo en..." + this.obstaculoSiguienteAleatorio)
+    console.log("Tiburon " + this.sharksCount + " en camino")
   },
 
   reset: function() {
@@ -71,9 +75,7 @@ const Game = {
   },
 
   isCollision: function() {
-    // colisiones genéricas
-    // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
-    return this.obstacles.some(obs => (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ))
+    return this.obstacles.some(obs => ((this.player.posX + this.player.width) - 40 > obs.posX && (obs.posX + obs.width - 30) > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ))
   },
 
    gameOver: function() {
@@ -84,6 +86,7 @@ const Game = {
         window.cancelAnimationFrame(id);
       }
     console.log("GAME MOTHERFUCKING OVER")
+    console.log("Tiburones saltados" + this.sharkJumped)
   }
 
 }
@@ -98,11 +101,9 @@ function movimiento(){
     this.drawAll();
     this.moveAll();
 
-    // this.clearObstacles()
      if(this.framesCounter % this.obstaculoSiguienteAleatorio === 0) this.generateObstacles();
      if(this.isCollision()) this.gameOver();
-    // if(this.framesCounter > 1000) this.framesCounter = 0;
-    //window.requestAnimationFrame(movimiento.bind(this))
+    if(this.framesCounter > 1500) this.framesCounter = 0;
    
    if(!this.stop) this.requestId =   window.requestAnimationFrame(movimiento.bind(this));
     
