@@ -71,7 +71,10 @@ const Game = {
   },
 
   clearObstacles: function() {
+    var jumpedSharks = 0
     this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= -60))
+    jumpedSharks =  jumpedSharks + this.obstacles.length
+    this.sharksJumped = this.sharksCount - jumpedSharks;
   },
 
   isCollision: function() {
@@ -79,14 +82,13 @@ const Game = {
   },
 
    gameOver: function() {
-    
     this.stop = true
       var id = window.requestAnimationFrame(function(){});
       while(id--){
         window.cancelAnimationFrame(id);
       }
     console.log("GAME MOTHERFUCKING OVER")
-    console.log("Tiburones saltados" + this.sharkJumped)
+    console.log("Tiburones saltados: " + this.sharksJumped)
   }
 
 }
@@ -101,8 +103,8 @@ function movimiento(){
     this.drawAll();
     this.moveAll();
 
-     if(this.framesCounter % this.obstaculoSiguienteAleatorio === 0) this.generateObstacles();
-     if(this.isCollision()) this.gameOver();
+    if(this.framesCounter % this.obstaculoSiguienteAleatorio === 0) this.generateObstacles();
+    if(this.isCollision()) this.gameOver();
     if(this.framesCounter > 1500) this.framesCounter = 0;
    
    if(!this.stop) this.requestId =   window.requestAnimationFrame(movimiento.bind(this));
