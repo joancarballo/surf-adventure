@@ -37,7 +37,7 @@ const Game = {
     this.reset()
  
     this.requestId = window.requestAnimationFrame(movimiento.bind(this))
-    this.timerVar = window.setInterval(countUp(), 1000),
+    this.timerVar = window.setInterval(countUp(), 1000), // INICIO EL CONTADOR
 
     this.framesCounter++;
   },
