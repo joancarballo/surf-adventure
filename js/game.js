@@ -15,8 +15,10 @@ const Game = {
   obstaculoSiguienteAleatorio: 60,
   sharksJumped: 0,
   sharksCount: 0,
-  timerVar: setInterval(countTimer, 1000).bind(this),
-  totalSeconds: 0,
+
+  min: 0,
+  second: 00,
+  zeroPlaceholder: 0,
 
   init: function() {
     this.canvas = document.getElementById('game-surf');
@@ -35,8 +37,23 @@ const Game = {
     this.reset()
  
     this.requestId = window.requestAnimationFrame(movimiento.bind(this))
+    this.timerVar = window.setInterval(countUp(), 1000),
 
     this.framesCounter++;
+  },
+
+  countUp: function() {
+    this.second++;
+    if(this.second == 59){
+      this.second = 00;
+      this.min = this.min + 1;
+    }
+    if(this.second == 10){
+        this.zeroPlaceholder = '';
+    }else
+    if(this.second == 00){
+        this.zeroPlaceholder = 0;
+    }
   },
 
   drawAll: function() {
@@ -59,7 +76,6 @@ const Game = {
     this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height))
     this.obstaculoSiguienteAleatorio = 200 + (Math.floor(Math.random()*150))
     console.log("Siguiente obstáculo en..." + this.obstaculoSiguienteAleatorio)
-    console.log("Tiburon " + this.sharksCount + " en camino")
   },
 
   reset: function() {
@@ -87,15 +103,14 @@ const Game = {
 
    gameOver: function() {
       this.ctx.fillRect(60, 60, 680, 330)
-      console.log("Cuadrado Azul")
+      console.log("GAME OVER")
       this.ctx.save()
       this.ctx.fillStyle = "#FFFFFF";
       this.ctx.fillText("JAJAJAJAJA CHOF JAJAJAJAJA", 170, 100);
       this.ctx.fillText("GAME OVER", 300, 150);
       this.ctx.fillText("Tiburones saltados: " + this.sharksJumped, 250, 250);
-      this.ctx.fillText("Total Tiempo: " + this.seconds, 300, 250)
+      this.ctx.fillText("Total Tiempo: " + this.timerVar, 250, 300)
       this.ctx.restore(),
-      console.log("Hello world")
 
 
       // AQUÍ TENGO QUE HACER QUE EN MEDIO DEL CANVAS APAREZCA LA PUNTUACIÓN
@@ -127,18 +142,4 @@ function movimiento(){
     if(this.framesCounter > 1500) this.framesCounter = 0;
     if(!this.stop) this.requestId =   window.requestAnimationFrame(movimiento.bind(this));
     
-}
-
-function countTimer() {
-  ++totalSeconds;
-  var hour = Math.floor(totalSeconds /3600);
-  var minute = Math.floor((totalSeconds - hour*3600)/60);
-  var seconds = totalSeconds - (hour*3600 + minute*60);
-  if(hour < 10)
-    hour = "0"+hour;
-  if(minute < 10)
-    minute = "0"+minute;
-  if(seconds < 10)
-    seconds = "0"+seconds;
-  document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
 }
