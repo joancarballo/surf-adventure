@@ -8,7 +8,7 @@ const Game = {
   playerKeys: {
     SPACE: 32,
   },
-  score: 0,
+  //score: 0,
   requestId: undefined,
   stop: false,
   sharkJumped: 0,
@@ -16,9 +16,7 @@ const Game = {
   sharksJumped: 0,
   sharksCount: 0,
 
-  min: 0,
-  second: 00,
-  zeroPlaceholder: 0,
+
 
   init: function() {
     this.canvas = document.getElementById('game-surf');
@@ -45,6 +43,10 @@ const Game = {
     this.framesCounter = 0;
     this.sharksJumped = 0;
     this.sharksCount = 0;
+    this.obstaculoSiguienteAleatorio = 100;
+
+    //this.obstaclesVx = 5;
+    this.level = 1;
 
     this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
   },
@@ -72,25 +74,15 @@ const Game = {
     // actualizo posiciones de sprites
     this.moveAll();
 
+    // Aumento de dificultad
+    if(this.framesCounter % 360 === 0) this.level = this.level + 1;
+
+    
     
     if(this.framesCounter >= this.obstaculoSiguienteAleatorio) this.generateObstacles();
     if(this.isCollision()) this.gameOver();
     if(!this.stop) this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
     
-  },
-
-  countUp: function() {
-    this.second++;
-    if(this.second == 59){
-      this.second = 00;
-      this.min = this.min + 1;
-    }
-    if(this.second == 10){
-        this.zeroPlaceholder = '';
-    }else
-    if(this.second == 00){
-        this.zeroPlaceholder = 0;
-    }
   },
 
   drawAll: function() {
@@ -109,9 +101,14 @@ const Game = {
   },
 
   generateObstacles: function() {
+    var obstaclesVx = 5 + this.level;
+    var minFramesDistance = 60;
+    var maxFramesDistance = Math.min( minFramesDistance, 170 - ( this.level * 2 ) );
+  
+
     this.sharksCount++
-    this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height))
-    this.obstaculoSiguienteAleatorio = this.framesCounter + 100 + (Math.floor(Math.random()*100))
+    this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height, obstaclesVx))
+    this.obstaculoSiguienteAleatorio = this.framesCounter + minFramesDistance + (Math.floor(Math.random()*maxFramesDistance))
     console.log("Siguiente obstáculo en..." + this.obstaculoSiguienteAleatorio)
   },
 

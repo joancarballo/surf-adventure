@@ -6,6 +6,7 @@ window.onload = function () {
   //var pantalla = 'inicio'; // jugando, gameover
 
   document.getElementById("startBtn").onclick = function () {
+    document.getElementById("startBtn").blur();
     document.getElementById("startBtn").innerHTML = "RESET";
     //pantalla = 'jugando';
     Game.start();
