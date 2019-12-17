@@ -34,12 +34,31 @@ const Game = {
     //this.start();
   },
   
+  stopGame: function() {
+    this.stop = true;
+    if ( this.requestId ) {
+      window.cancelAnimationFrame( this.requestId );
+      this.requestId = undefined;
+    }
+  },
+
+  resumeGame: function() {
+    this.stop = false;
+    this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
+  },
+  
+  reset: function() {
+    this.stopGame();
+    this.start();
+  },
   
   start: function() {
     this.initSprites();
 
     this.timeVar = new Date();
     
+    this.stop = false;
+
     this.framesCounter = 0;
     this.sharksJumped = 0;
     this.sharksCount = 0;
@@ -59,6 +78,11 @@ const Game = {
     //ScoreBoard.init(this.ctx, this.score)
   },
   movimiento: function(){
+
+    // compruebo que el juego está parado
+    if ( this.stop ) {
+      return;
+    }
 
     this.framesCounter++;
 
@@ -81,7 +105,9 @@ const Game = {
     
     if(this.framesCounter >= this.obstaculoSiguienteAleatorio) this.generateObstacles();
     if(this.isCollision()) this.gameOver();
-    if(!this.stop) this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
+
+    
+    this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
     
   },
 
@@ -145,11 +171,15 @@ const Game = {
       // PUNTUACIÓN = TIBURONES SALTADOS
       // PUNTUACIÓN BONUS = TIBURONES SALTADOS * SEGUNDOS JUGADOS (TIEMPO AÚN POR IMPLEMENTAR)
 
-    this.stop = true
+      this.stopGame();
+
+
+      /*
       var id = window.requestAnimationFrame(function(){});
       while(id--){
         window.cancelAnimationFrame(id);
       }
+      */
     console.log("GAME MOTHERFUCKING OVER")
     console.log("Tiburones saltados: " + this.sharksJumped)
   }

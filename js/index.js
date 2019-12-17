@@ -3,13 +3,33 @@ window.onload = function () {
   Game.init();
 
 
-  //var pantalla = 'inicio'; // jugando, gameover
+  var isStart = true;
+  var isPaused = false;
+  var startBtn = document.getElementById("startBtn");
+  var stopBtn = document.getElementById("stopBtn");
 
-  document.getElementById("startBtn").onclick = function () {
-    document.getElementById("startBtn").blur();
-    document.getElementById("startBtn").innerHTML = "RESET";
-    //pantalla = 'jugando';
-    Game.start();
-  } 
-  // ARREGLAR QUE HAYA UN PLAY Y UN RESET QUE FUNCIONEN, AHORA INICIA CADA VEZ QUE ABRES EL JUEGO
+  startBtn.onclick = function () {
+    startBtn.blur();
+
+    if (isStart) {
+      isStart = false;
+      startBtn.innerHTML = "RESET";
+      Game.start();
+    } else {
+      Game.reset();
+    }
+
+  }
+
+  stopBtn.onclick = function () {
+    stopBtn.blur();
+    if ( isPaused ) {
+      isPaused = false;
+      Game.resumeGame();
+    } else {
+      isPaused = true;
+      Game.stopGame();
+    }
+  }
+
 };
