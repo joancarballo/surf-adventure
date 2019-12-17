@@ -29,17 +29,54 @@ const Game = {
     this.canvas.height = this.height;
     this.ctx.font = "30px Arial";
     this.ctx.fillStyle = "#1262DC";
-
-    this.start();
+    
+    //this.btnStart = document.getElementById("startBtn");
+    //this.btnStop = document.getElementById("stopBtn");
+    
+    //this.start();
   },
-
+  
+  
   start: function() {
-    this.reset()
- 
-    this.requestId = window.requestAnimationFrame(movimiento.bind(this))
-    this.timerVar = window.setInterval(countUp(), 1000), // INICIO EL CONTADOR
+    this.initSprites();
+
+    this.timeVar = new Date();
+    
+    this.framesCounter = 0;
+    this.sharksJumped = 0;
+    this.sharksCount = 0;
+
+    this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
+  },
+  
+  initSprites: function() {
+    this.background = new Background(this.ctx, this.width, this.height);
+    this.player = new Player(this.ctx, 100, 100, this.width, this.height);
+    this.ola = new Ola(this.ctx, 800, 150, this.width, this.height);
+    this.obstacles = [];
+    //ScoreBoard.init(this.ctx, this.score)
+  },
+  movimiento: function(){
 
     this.framesCounter++;
+
+    // limpio canvas
+    this.clear();
+
+    // borro obstáculos que están fuera de pantalla
+    this.clearObstacles();
+
+    
+    this.drawAll();
+
+    // actualizo posiciones de sprites
+    this.moveAll();
+
+    
+    if(this.framesCounter >= this.obstaculoSiguienteAleatorio) this.generateObstacles();
+    if(this.isCollision()) this.gameOver();
+    if(!this.stop) this.requestId = window.requestAnimationFrame(this.movimiento.bind(this));
+    
   },
 
   countUp: function() {
@@ -74,27 +111,20 @@ const Game = {
   generateObstacles: function() {
     this.sharksCount++
     this.obstacles.push(new Obstacles(this.ctx, 50, 50, this.width, this.height))
-    this.obstaculoSiguienteAleatorio = 200 + (Math.floor(Math.random()*150))
+    this.obstaculoSiguienteAleatorio = this.framesCounter + 100 + (Math.floor(Math.random()*100))
     console.log("Siguiente obstáculo en..." + this.obstaculoSiguienteAleatorio)
   },
 
-  reset: function() {
-    this.background = new Background(this.ctx, this.width, this.height);
-    this.player = new Player(this.ctx, 100, 100, this.width, this.height,);
-    this.ola = new Ola(this.ctx, 800, 150, this.width, this.height,);
-    this.obstacles = [];
-    //ScoreBoard.init(this.ctx, this.score)
-  },
 
   clear: function() {
     this.ctx.clearRect(0, 0, this.width, this.height)
   },
 
   clearObstacles: function() {
-    var jumpedSharks = 0
-    this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= -60))
-    jumpedSharks =  jumpedSharks + this.obstacles.length
-    this.sharksJumped = this.sharksCount - jumpedSharks;
+    // borro tiburones que están fuera
+    this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= -60));
+    // recalculo puntuación de tiburones: total - los que hay en pantalla
+    this.sharksJumped = this.sharksCount - this.obstacles.length;
   },
 
   isCollision: function() {
@@ -102,6 +132,7 @@ const Game = {
   },
 
    gameOver: function() {
+      this.totalTiempo = (new Date() - this.timeVar)/1000
       this.ctx.fillRect(60, 60, 680, 330)
       console.log("GAME OVER")
       this.ctx.save()
@@ -109,7 +140,7 @@ const Game = {
       this.ctx.fillText("JAJAJAJAJA CHOF JAJAJAJAJA", 170, 100);
       this.ctx.fillText("GAME OVER", 300, 150);
       this.ctx.fillText("Tiburones saltados: " + this.sharksJumped, 250, 250);
-      this.ctx.fillText("Total Tiempo: " + this.timerVar, 250, 300)
+      this.ctx.fillText("Total Tiempo: " + this.totalTiempo, 250, 300)
       this.ctx.restore(),
 
 
@@ -128,18 +159,3 @@ const Game = {
 
 }
 
-function movimiento(){
-
-    this.framesCounter++;
-
-    this.clear();
-    this.clearObstacles()
-    this.drawAll();
-    this.moveAll();
-
-    if(this.framesCounter % this.obstaculoSiguienteAleatorio === 0) this.generateObstacles();
-    if(this.isCollision()) this.gameOver();
-    if(this.framesCounter > 1500) this.framesCounter = 0;
-    if(!this.stop) this.requestId =   window.requestAnimationFrame(movimiento.bind(this));
-    
-}
