@@ -5,7 +5,7 @@
 
 ## Introduction
 
-Juego hecho en Javascript como proyecto final del Modulo 1 del bootcam Web Development Part Time de Ironhack. 
+Juego hecho en Javascript como proyecto final del Modulo 1 del bootcamp Web Development Part Time de Ironhack. 
 
 Empezado en Diciembre de 2019. Finalizado... bueno... Presentado el 21 de Diciembre de 2019. 
 
