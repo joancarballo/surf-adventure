@@ -23,12 +23,12 @@ https://joancarballo.github.io/surf-adventure/
 
 ## Créditos
 
-Concepto: Mario Bros by Diego && Carballo
-Programación: Carballo
-Diseño de escenarios: Google Imágenes && Carballo
-Diseño de personajes: Google Imágenes && Carballo
-Sonidos: Carballo
+- Programación: Carballo
+- Diseño de escenarios: Google Imágenes && Carballo
+- Diseño de personajes: Google Imágenes && Carballo
+- Sonidos: Carballo
+- Concepto: Mario Bros by Diego && Carballo
 
 ## Captura de Pantalla
 
-<img src="https://github.com/joancarballo/surf-adventure/blob/master/images/gameplay.jpg" alt="Carballo" width="400" height="225">
+<img src="https://github.com/joancarballo/surf-adventure/blob/master/images/gameplay.png" alt="Carballo" width="400" height="225">
