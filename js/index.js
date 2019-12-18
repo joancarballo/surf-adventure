@@ -6,7 +6,7 @@ window.onload = function () {
   var isStart = true;
   var isPaused = false;
   var startBtn = document.getElementById("startBtn");
-  var stopBtn = document.getElementById("stopBtn");
+  var pauseBtn = document.getElementById("stopBtn");
 
   startBtn.onclick = function () {
     startBtn.blur();
@@ -21,8 +21,8 @@ window.onload = function () {
 
   }
 
-  stopBtn.onclick = function () {
-    stopBtn.blur();
+  pauseBtn.onclick = function () {
+    pauseBtn.blur();
     if ( isPaused ) {
       isPaused = false;
       Game.resumeGame();

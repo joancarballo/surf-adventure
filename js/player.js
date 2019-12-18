@@ -12,6 +12,7 @@ class Player {
     this.gravity = 0.3;
     this.gameWidth = gameWidth;
     this.vy = 2;
+    this.saltoSound = new Sound("sounds/saltazo.mp3");
     // this.frames = 3;
     // this.framesIndex = 0;
 
@@ -39,11 +40,13 @@ class Player {
       this.posY -= this.vy;
       this.vy -= 10;
   }
-
+    
   setListeners() {
     document.addEventListener('keydown', (e) => {
       switch(e.keyCode) {
         case 32:
+            this.saltoSound.play();
+            console.log("Saltando")
             if (this.posY >= this.posY0) {
               this.salta();
             }

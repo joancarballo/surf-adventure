@@ -99,7 +99,7 @@ const Game = {
     this.moveAll();
 
     // Aumento de dificultad
-    if(this.framesCounter % 360 === 0) this.level = this.level + 1;
+    if(this.framesCounter % 180 === 0) this.level = this.level + 2;
 
     
     
