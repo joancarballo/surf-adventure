@@ -17,9 +17,9 @@ Empezado en Diciembre de 2019. Finalizado... bueno... Presentado el 21 de Diciem
 
 https://joancarballo.github.io/surf-adventure/
 
-START: Iniciar juego
-RESET: Reinicia el juego
-PAUSE: Pausa el juego
+- START: Iniciar juego
+- RESET: Reinicia el juego
+- PAUSE: Pausa el juego
 
 ## Créditos
 
@@ -31,4 +31,4 @@ Sonidos: Carballo
 
 ## Captura de Pantalla
 
-<img src="https://github.com/joancarballo/surf-adventure/blob/master/images/logo.jpg" alt="Carballo" width="400" height="225">
+<img src="https://github.com/joancarballo/surf-adventure/blob/master/images/gameplay.jpg" alt="Carballo" width="400" height="225">
